@@ -78,7 +78,19 @@ const RootQuery = new GraphQLObjectType({
                 const res = await axios.get(`https://api.spacexdata.com/v4/rockets`)
                 return res.data;
             }
-        }
+        },
+        rocket: {
+            type: RocketType,
+            args: {
+                id: {
+                    type: GraphQLString
+                }
+            },
+            async resolve(parent, args) {
+                const res = await axios.get(`https://api.spacexdata.com/v4/rockets/${args.id}`)
+                return res.data;
+            }
+        },
     }
 });
 
